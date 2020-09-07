@@ -15,5 +15,7 @@ public interface UserService {
 	
 	public void deleteById(String id);
 	
+	public User changeUser(User obj, String id);
+	
 	public User fromDTO(UserDTO objDTO);
 }

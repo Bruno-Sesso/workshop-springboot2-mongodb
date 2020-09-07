@@ -44,4 +44,14 @@ public class UserServiceImpl implements UserService{
 	public User fromDTO(UserDTO objDTO) {
 		return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
 	}
+
+	@Override
+	public User changeUser(User obj, String id) {
+		User user = findById(id);
+		
+		user.setName(obj.getName());
+		user.setEmail(obj.getEmail());
+		
+		return repo.save(user);
+	}
 }
