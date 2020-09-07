@@ -1,28 +1,30 @@
 package br.com.brunosesso.workshopmongo.resources;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.brunosesso.workshopmongo.domain.User;
+import br.com.brunosesso.workshopmongo.service.UserService;
 
 @RestController
 @RequestMapping(value = "/api/1.0/users")
 public class UserResources {
 	
+	@Autowired
+	private UserService service; 
+	
 	@GetMapping
 	public ResponseEntity<List<User>> findAll() {
-		User paula = new User("1", "Paula", "paula@gmail.com");
-		User bruno = new User("1", "Bruno", "bruno@gmail.com");
+		List<User> listUser = service.findAll();
+		if(listUser.isEmpty())
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
 		
-		List<User> list = new ArrayList<>();
-		list.addAll(Arrays.asList(paula, bruno));
-		
-		return ResponseEntity.ok().body(list);
+		return ResponseEntity.ok().body(listUser);
 	}
 }
