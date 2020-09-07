@@ -7,4 +7,6 @@ import br.com.brunosesso.workshopmongo.domain.User;
 public interface UserService {
 	
 	public List<User> findAll();
+	
+	public User findById(String id);
 }
