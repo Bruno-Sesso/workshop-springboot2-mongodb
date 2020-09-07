@@ -13,5 +13,7 @@ public interface UserService {
 	
 	public User addUser(User obj);
 	
+	public void deleteById(String id);
+	
 	public User fromDTO(UserDTO objDTO);
 }
