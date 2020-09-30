@@ -10,4 +10,5 @@ public interface PostService {
 	
 	public Post findById(String id);
 	
+	public List<Post> findByTitle(String text);
 }

@@ -28,4 +28,9 @@ public class PostServiceImpl implements PostService{
 		
 		return optPost.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 	}
+
+	@Override
+	public List<Post> findByTitle(String text) {
+		return repo.findByTitleContainingIgnoreCase(text);
+	}
 }
