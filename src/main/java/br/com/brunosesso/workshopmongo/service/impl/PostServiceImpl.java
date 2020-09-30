@@ -1,5 +1,6 @@
 package br.com.brunosesso.workshopmongo.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,5 +33,11 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public List<Post> findByTitle(String text) {
 		return repo.searchTitle(text);
+	}
+
+	@Override
+	public List<Post> search(String text, Date startDate, Date endDate) {
+		endDate = new Date(endDate.getTime() + 24 * 60 * 60 * 1000);
+		return repo.search(text, startDate, endDate);
 	}
 }

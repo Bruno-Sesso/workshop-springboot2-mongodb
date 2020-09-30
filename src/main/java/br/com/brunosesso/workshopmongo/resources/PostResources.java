@@ -1,5 +1,6 @@
 package br.com.brunosesso.workshopmongo.resources;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,6 +44,21 @@ public class PostResources {
 		text = URL.decodeParam(text);
 		
 		List<Post> list = service.findByTitle(text);
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value="/search")
+	public ResponseEntity<List<Post>> search(
+			@RequestParam(value = "text", defaultValue = "") String text,
+			@RequestParam(value = "startDate", defaultValue = "") String startDate,
+			@RequestParam(value = "endDate", defaultValue = "") String endDate) {
+		
+		text = URL.decodeParam(text);
+		Date start = URL.convertDate(startDate, new Date(0));
+		Date end = URL.convertDate(endDate, new Date());
+		
+		List<Post> list = service.search(text, start, end);
+		
 		return ResponseEntity.ok().body(list);
 	}
 }
